@@ -1,0 +1,4 @@
+cryptography>=3.4.8
+qrcode[pil]>=7.3
+pyzipper>=0.3.6
+Pillow>=8.4.0
