@@ -1,0 +1,106 @@
+[[package]]
+name = "cryptography"
+version = "42.0.5"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+dependencies = [
+    "cffi>=1.12",
+    "pycparser",
+]
+files = [
+    { url = "https://files.pythonhosted.org/packages/...", hash = "sha256:..." },
+]
+
+[[package]]
+name = "pyzipper"
+version = "0.3.6"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "qrcode"
+version = "7.4.2"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+dependencies = [
+    "Pillow",
+]
+extras = ["pil"]
+
+[[package]]
+name = "Pillow"
+version = "10.2.0"
+category = "main"
+optional = false
+python-versions = ">=3.8"
+
+[[package]]
+name = "pytest"
+version = "7.4.4"
+category = "dev"
+optional = true
+python-versions = ">=3.7"
+
+[[package]]
+name = "pytest-cov"
+version = "4.1.0"
+category = "dev"
+optional = true
+python-versions = ">=3.6"
+
+[[package]]
+name = "black"
+version = "24.4.2"
+category = "dev"
+optional = true
+python-versions = ">=3.8"
+
+[[package]]
+name = "isort"
+version = "5.13.2"
+category = "dev"
+optional = true
+python-versions = ">=3.8"
+
+[[package]]
+name = "mypy"
+version = "1.10.0"
+category = "dev"
+optional = true
+python-versions = ">=3.8"
+
+[[package]]
+name = "ruff"
+version = "0.4.4"
+category = "dev"
+optional = true
+python-versions = ">=3.7"
+
+[[package]]
+name = "pre-commit"
+version = "3.7.1"
+category = "dev"
+optional = true
+python-versions = ">=3.8"
+
+[[package]]
+name = "types-pillow"
+version = "10.2.0.20240426"
+category = "dev"
+optional = true
+python-versions = "*"
+
+[[package]]
+name = "pytest-mock"
+version = "3.14.0"
+category = "dev"
+optional = true
+python-versions = ">=3.6"
+
+[metadata]
+lock-version = "1.0"
+python-versions = ">=3.10"
+content-hash = "<hash-of-pyproject-toml>"
