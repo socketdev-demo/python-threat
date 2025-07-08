@@ -1,0 +1,199 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+dynamic = ["version"]
+name = "sample-threat-test"
+
+description = "Test"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+keywords = ["test"]
+authors = [
+  { name = "Test Person", email = "test@test.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: System Administrators",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Topic :: System :: Networking",
+  "Topic :: System :: Systems Administration",
+  "Topic :: Security",
+]
+dependencies = [
+  "cryptography>=3.4.8",
+  "qrcode[pil]>=7.3",
+  "pyzipper>=0.3.6",
+  "Pillow>=8.4.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.0",
+  "pytest-cov",
+  "black",
+  "isort",
+  "mypy",
+  "ruff",
+  "pre-commit",
+  "types-pillow",
+]
+test = [
+  "pytest>=7.0",
+  "pytest-cov",
+  "pytest-mock",
+]
+
+[project.urls]
+Documentation = "https://github.com/test/test"
+Issues = "https://github.com/test/test/issues"
+Source = "https://github.com/test/test"
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "/.github",
+  "/docs",
+  "/tests",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/wireguard_peer_tool"]
+
+[tool.black]
+target-version = ["py38"]
+line-length = 88
+skip-string-normalization = true
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+
+[tool.mypy]
+python_warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[tool.ruff]
+target-line-length = 88
+exclude = [
+  "src/test/_version.py",
+]
+
+[tool.ruff.lint]
+select = [
+  "A",
+  "ARG",
+  "B",
+  "C",
+  "DTZ",
+  "E",
+  "EM",
+  "F",
+  "FBT",
+  "I",
+  "ICN",
+  "ISC",
+  "N",
+  "PLC",
+  "PLE",
+  "PLR",
+  "PLW",
+  "Q",
+  "RUF",
+  "S",
+  "T",
+  "TID",
+  "UP",
+  "W",
+  "YTT",
+]
+ignore = [
+  # Allow non-abstract empty methods in abstract base classes
+  "B027",
+  # Allow boolean positional values in function calls, like `dict.get(... True)`
+  "FBT003",
+  # Ignore checks for possible passwords
+  "S105", "S106", "S107",
+  # Ignore complexity
+  "C901", "PLR0911", "PLR0912", "PLR0913", "PLR0915",
+  # Allow try-except-pass for robustness in cryptographic operations
+  "S110",
+  # Allow imports inside functions for circular import avoidance
+  "PLC0415",
+  # Allow subprocess calls (needed for WireGuard tools)
+  "S603", "S607",
+  # Allow SQL string formatting (controlled context)
+  "S608",
+  # Allow global statements (needed for caching)
+  "PLW0603",
+  # Allow magic value comparisons (IP addresses, etc.)
+  "PLR2004",
+  # Allow unused loop variables
+  "B007",
+  # Allow redefined loop names
+  "PLW2901",
+  # Allow boolean default args
+  "FBT002",
+  # Allow unused function arguments (CLI handlers)
+  "ARG001",
+  # Allow raise without from in except blocks
+  "B904",
+]
+unfixable = [
+  # Don't touch unused imports
+  "F401",
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["wireguard_peer_tool"]
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.ruff.lint.per-file-ignores]
+# Tests can use magic values, assertions, and relative imports
+"tests/**/*" = ["PLR2004", "S101", "TID252"]
+
+[tool.pytest.ini_options]
+addopts = [
+  "--strict-config",
+  "--strict-markers",
+  "--cov=wireguard_peer_tool",
+  "--cov-report=term-missing",
+  "--cov-report=html",
+  "--cov-report=xml",
+]
+xfail_strict = true
+filterwarnings = [
+  "error",
+]
+log_cli_level = "INFO"
+markers = [
+  "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+  "integration: marks tests as integration tests",
+]
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/wireguard_peer_tool/_version.py"
