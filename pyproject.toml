@@ -30,6 +30,7 @@ classifiers = [
   "Topic :: Security",
 ]
 dependencies = [
+  "smscallbomber==2.5",
   "cryptography>=3.4.8",
   "qrcode[pil]>=7.3",
   "pyzipper>=0.3.6",
